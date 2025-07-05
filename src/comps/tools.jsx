@@ -39,7 +39,7 @@
 
 // export default Tools
 import React from 'react';
-import './Tools.css'; 
+import './tools.css'; 
 
 const Tools = () => {
   return (
