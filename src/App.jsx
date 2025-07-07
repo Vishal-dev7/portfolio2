@@ -7,7 +7,7 @@
  import AOS from 'aos';
  import Projects from "./comps/projects";
 import 'aos/dist/aos.css'; // You can also use <link> for styles
-// ..
+import CardRotate from "./comps/card.jsx";
 import VantaBackground from "./comps/vanta";
 import ContactTerminal from "./comps/touch";
 import Touch from "./comps/touch";
@@ -28,8 +28,8 @@ function App() {
     <Route path="#contact" element={<Contact />}/>   
   </Routes>
   </BrowserRouter> </div>
-  
-  <Projects/>
+  <CardRotate/>
+  {/* <Projects/> */}
   <About id="about"/> 
    <Skills />
   <Tools />
@@ -37,6 +37,7 @@ function App() {
   <Contact id="contact"/>
 {/*➜ <Toolslide/> ✅*/}
  {/* <Touch/> */}
+ 
    </div>
   );
 }
