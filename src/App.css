@@ -35,7 +35,10 @@
 
 .containere {
   width: 100vw;
-  min-height: 100vh;
+
+  /* Default: auto height (tablet first) */
+  min-height: auto;
+
   --color: rgba(114, 114, 114, 0.3);
 
   background-color: #191a1a;
@@ -44,8 +47,23 @@
     linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
   background-size: 55px 55px;
 
-  overflow-x: hidden; /* FIX SIDE WHITE SPACE */
+  overflow-x: hidden;
 }
+
+/* 📱 Mobile */
+@media (max-width: 640px) {
+  .containere {
+    min-height: 100vh;
+  }
+}
+
+/* 💻 Laptop / PC */
+@media (min-width: 1024px) {
+  .containere {
+    min-height: 100vh;
+  }
+}
+
 .terminal_cursor {
   display: block;
   height: 14px;

@@ -43,7 +43,7 @@ const Home = () => {
       <Navbar />
 
       {/* MAIN CONTENT */}
-      <section className="  z-10 grid grid-cols-1 sm:grid-cols-2 px-10 sm:px-16 md:px-20 lg:px-24 pb-24 w-full">
+      <section className=" pt-5 md:pt-18  z-10 grid grid-cols-1 sm:grid-cols-2 px-10 sm:px-16 md:px-20 lg:px-24 pb-24 w-full">
          
         {/* LEFT */}
         <div className="mt-10 sm:mt-20 ">
@@ -71,7 +71,7 @@ const Home = () => {
                 </div>
 
         {/* RIGHT */}
-        <div className="order-1 sm:order-2 flex justify-center items-center mt-14 sm:mt-20 ">
+        <div className="order-2 sm:order-1 flex justify-center items-center mt-14 sm:mt-20 ">
                   <img
                     src={vishal}
                     alt="profile"

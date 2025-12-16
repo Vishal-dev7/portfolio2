@@ -6,19 +6,19 @@ const Navbar = () => {
   return (
     <>
       {/* NAV BAR */}
-      <nav className="w-full flex justify-end sm:justify-center px-4 py-4 relative z-50">
+      <nav className="w-full flex justify-end sm:justify-center px-4 py-4 fixed top-0 z-50">
         {/* Desktop Menu */}
         <div className="hidden sm:flex gap-8 bg-black text-white px-6 py-3 rounded-full shadow-md shadow-rose-600">
-          <a href="#home" className="hover:underline transtion-transform">Home</a>
-          <a href="#about" className="hover:underline transtion-transform">About</a>
-          <a href="#contact" className="hover:underline transtion-transform">Contact</a>
-          <a href="#social" className="hover:underline transtion-transform">Social</a>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="#social">Social</a>
         </div>
 
         {/* Hamburger */}
         <button
           onClick={() => setOpen(true)}
-          className="sm:hidden text-white z-900 fixed"
+          className="sm:hidden text-white z-50"
           aria-label="Open Menu"
         >
           <svg
@@ -39,7 +39,7 @@ const Navbar = () => {
       {/* OVERLAY */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/50  sm:hidden z-903"
+          className="fixed inset-0 bg-black/50 sm:hidden z-40"
           onClick={() => setOpen(false)}
         />
       )}

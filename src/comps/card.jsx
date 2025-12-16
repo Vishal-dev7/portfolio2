@@ -4,6 +4,7 @@ import Calculator from "../img/calculator.jpg";
 import Evolve from "../img/evolve.jpg";
 import Port from "../img/port.jpg";
 import Todo from "../img/todo.jpg";
+import ResumeBuilder from "../img/resume.jpg";
 
 function CardRotate({ children, onSendToBack, sensitivity }) {
   const x = useMotionValue(0);
@@ -54,7 +55,7 @@ export default function Stack({
             id: 4,
             title: "To-do-list for books",
             description: "Track books and tasks effortlessly.Stay organized and productive.",
-            link: "https://weatherapp.com",
+            link: "https://to-do-list-rose-pi.vercel.app/",
             img: Todo,
             
           },
@@ -78,6 +79,13 @@ export default function Stack({
             description: "An application for performing arithmetic operations.",
             link: "https://calculator-ochre-one.vercel.app/",
             img: Calculator,
+          },
+          {
+            id: 1,
+            title: "Resume builder",
+            description: "An application for creating resume from the user requirements and the user can download the resume as pdf format.",
+            link: "https://resumebuilder-ashy.vercel.app/",
+            img: ResumeBuilder,
           },
         ]
   );
