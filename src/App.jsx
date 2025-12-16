@@ -19,25 +19,27 @@ function App() {
   return (
     <div>
       
-  <div className=""id="vanta">
+  <div className="containeres"id="">
   
-  <BrowserRouter>
+  {/* <BrowserRouter>
   <Routes>
-     <Route path="/" element={<Home  class="bg-[url(./img/grid1.avif)]"/>}/>
-    <Route path="#about" element={<About />}/> 
-    <Route path="#contact" element={<Contact />}/>   
+      <Route path="#home" element={<Home />}/> 
+     <Route path="#about" element={<About />}/> 
+    <Route path="#contact" element={<Contact />}/>    
   </Routes>
-  </BrowserRouter> </div>
+  </BrowserRouter>  */}
+  <Home id="home"/>
   <CardRotate/>
-  {/* <Projects/> */}
+
   <About id="about"/> 
    <Skills />
   <Tools />
-  {/* <TerminalContactForm/> */}
+  
   <Contact id="contact"/>
 {/*➜ <Toolslide/> ✅*/}
  {/* <Touch/> */}
- 
+   {/* <Projects/> */}
+ {/* <TerminalContactForm/> */}</div>
    </div>
   );
 }

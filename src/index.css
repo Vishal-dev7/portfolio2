@@ -1,4 +1,138 @@
 html{
     scroll-behavior: smooth;
 }
+html,body{
+  margin:0;
+  padding:0;
+}
 
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 0 12px rgba(255,255,255,0.15);
+  }
+  50% {
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px rgba(255,255,255,0.35);
+  }
+}
+
+.float-glow {
+  animation: floatGlow 3.5s ease-in-out infinite;
+}
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.35) 10%, transparent 10.01%);
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(0);
+  opacity: 0;
+}
+
+.ripple:active::after {
+  transform: scale(2.5);
+  opacity: 1;
+  transition: transform 0.4s ease, opacity 0.8s ease;
+}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+html {
+  font-family: "Poppins", sans-serif;
+}
+/* ---------- NEON PARTICLE BACKDROP ---------- */
+.neon-particles {
+  position: relative;
+  z-index: 1;
+}
+
+.neon-particles::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255,0,102,.35), transparent 30%),
+    radial-gradient(circle at 70% 10%, rgba(138,43,226,.35), transparent 35%),
+    radial-gradient(circle at 40% 70%, rgba(255,0,102,.25), transparent 30%);
+  filter: blur(25px);
+  z-index: -1;
+  animation: neonFloat 6s ease-in-out infinite;
+}
+
+@keyframes neonFloat {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+/* ---------- IMAGE HALO ---------- */
+.neon-halo {
+  position: relative;
+}
+
+.neon-halo::before {
+  content: "";
+  position: absolute;
+  inset: -25px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255,0,102,.6), transparent 65%);
+  filter: blur(30px);
+  z-index: -1;
+  animation: haloPulse 3.5s ease-in-out infinite;
+}
+
+@keyframes haloPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* ---------- BUTTON ENERGY ---------- */
+.neon-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.neon-btn::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(255,0,102,.6),
+    transparent
+  );
+  animation: spinGlow 4s linear infinite;
+}
+
+.neon-btn::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: inherit;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+@keyframes spinGlow {
+  to {
+    transform: rotate(360deg);
+  }
+}

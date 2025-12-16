@@ -116,7 +116,7 @@ export default function Stack({
   };
 
   return (
-    <section className="w-full flex flex-col items-center bg-black py-10 text-white px-4 sm:px-6 lg:px-0 overflow-hidden ">
+    <section className="w-full flex flex-col items-center bg-gray-950 py-10 text-white px-4 sm:px-6 lg:px-0 overflow-hidden ">
       <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 text-center">
         My Projects
       </h2>

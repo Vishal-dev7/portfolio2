@@ -1,82 +1,70 @@
-import React, { useRef, useEffect, useState } from 'react';
-import styles from "./styles/bubble.module.css";
+import React, { useState } from "react";
+
 const Navbar = () => {
-  const sidenavRef = useRef(null);
   const [open, setOpen] = useState(false);
 
-  // Lock scroll and handle outside click
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (sidenavRef.current && !sidenavRef.current.contains(event.target)) {
-        setOpen(false);
-      }
-    };
-
-    if (open) {
-      document.body.classList.add('overflow-hidden');
-      document.addEventListener('mousedown', handleOutsideClick);
-    } else {
-      document.body.classList.remove('overflow-hidden');
-      document.removeEventListener('mousedown', handleOutsideClick);
-    }
-
-    return () => {
-      document.body.classList.remove('overflow-hidden');
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, [open]);
-
   return (
-    <div>
-      <div className="flex justify-end items-center ">
-        {/* <h1 className="font-bold text-xl md:text-2xl ml-3 pt-5 hover:animate-pulse hover:delay-100">Vishal R.</h1> */}
-{/* <BubbleText /> */}
-        {/* Desktop nav */}
-        <div className="hidden sm:block items-center  mx-auto " >
-         <div className='  flex items-center  p-3   bg-black text-white mx-auto mt-5 rounded-3xl shadow-sm shadow-rose-600 xl:px-5' >              
-            <a href="#home" className="hover:underline mx-5 " >Home</a>
-            <a href="#about" className="hover:underline mx-5">About</a>
-            <a href="#contact" className="hover:underline mx-5 mr-2">Contact</a>
-          </div>
+    <>
+      {/* NAV BAR */}
+      <nav className="w-full flex justify-end sm:justify-center px-4 py-4 relative z-50">
+        {/* Desktop Menu */}
+        <div className="hidden sm:flex gap-8 bg-black text-white px-6 py-3 rounded-full shadow-md shadow-rose-600">
+          <a href="#home" className="hover:underline transtion-transform">Home</a>
+          <a href="#about" className="hover:underline transtion-transform">About</a>
+          <a href="#contact" className="hover:underline transtion-transform">Contact</a>
+          <a href="#social" className="hover:underline transtion-transform">Social</a>
         </div>
 
-        {/* Hamburger icon */}
-        <button onClick={() => setOpen(prev => !prev)} className="sm:hidden mr-3 mt-3">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 30 30" className="w-8 h-8 text-white">
-            <path
-              fillRule="evenodd"
-              d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm8.25 5.25a.75.75 0 0 1 .75-.75h8.25a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75Z"
-              clipRule="evenodd"
-            />
+        {/* Hamburger */}
+        <button
+          onClick={() => setOpen(true)}
+          className="sm:hidden text-white z-900 fixed"
+          aria-label="Open Menu"
+        >
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
           </svg>
         </button>
-      </div>
+      </nav>
 
-      {/* Mobile sidebar */}
-      <div className={`fixed inset-0 z-50 md:hidden ${open ? 'block' : 'hidden'}`}>
+      {/* OVERLAY */}
+      {open && (
         <div
-          ref={sidenavRef}
-          className="absolute right-0 top-12 w-2/3 h-1/2 bg-gray-800 text-white transition-transform duration-500 ease-in-out scroll-smooth"
+          className="fixed inset-0 bg-black/50  sm:hidden z-903"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      {/* MOBILE MENU */}
+      <div
+        className={`fixed top-0 right-0 h-full w-64 bg-gray-900 text-white z-50
+        transform transition-transform duration-300
+        ${open ? "translate-x-0" : "translate-x-full"}`}
+      >
+        <button
+          onClick={() => setOpen(false)}
+          className="absolute top-4 right-4 text-xl"
         >
-          <ul className="mt-16 p-6 space-y-6 text-lg">
-            <li><a href="#home" onClick={() => setOpen(false)}>Home</a></li>
-            <li><a href="#about" onClick={() => setOpen(false)}>About</a></li>
-            <li><a href="#contact" onClick={() => setOpen(false)}>Contact</a></li>
-          </ul>
-        </div>
+          ✕
+        </button>
+
+        <ul className="mt-20 flex flex-col items-center gap-6 text-lg">
+          <li><a href="#home" onClick={() => setOpen(false)}>Home</a></li>
+          <li><a href="#about" onClick={() => setOpen(false)}>About</a></li>
+          <li><a href="#contact" onClick={() => setOpen(false)}>Contact</a></li>
+          <li><a href="#social" onClick={() => setOpen(false)}>Social</a></li>
+        </ul>
       </div>
-    </div>
-  );
-};
-const BubbleText = () => {
-  return (
-    <h2 className="text-center text-5xl font-thin text-indigo-300">
-      {"Vishal.R".split("").map((child, idx) => (
-        <span className={styles.hoverText} key={idx}>
-          {child}
-        </span>
-      ))}
-    </h2>
+    </>
   );
 };
 

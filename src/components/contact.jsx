@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../comps/navbar'
 import  { useState, useRef, useEffect } from "react";
+import Reacticon from '../assets/react.svg';
 const Contact = () => {
  const [step, setStep] = useState(1);
    const [form, setForm] = useState({ email: "", name: "", description: "" });
@@ -10,6 +11,7 @@ const Contact = () => {
      if (step === 1 && form.email.trim()) setStep(2);
      if (step === 2 && form.name.trim()) setStep(3);
      if (step === 3 && form.description.trim()) setStep(4);
+
    };
  
    const handleRestart = () => {
@@ -18,23 +20,30 @@ const Contact = () => {
    };
  
   const handleSend = () => {
-  alert("✅ Message started sending..!");
+  const msgspan = document.getElementById("msgspan");
+  msgspan.textContent = "msg sending...";
 
-  const number = "+919342236148";
-  const { name, email, description } = form;
+  // Delay redirect so text updates first
+  setTimeout(() => {
+    alert("Redirecting to WhatsApp");
 
-  if (!name.trim() || !email.trim() || !description.trim()) {
-    alert("Please fill out all fields.");
-    return;
-  }
+    const number = "+919342236148";
+    const { name, email, description } = form;
 
-  const text = `Hi dude, I'm ${name}. Contact me: ${email}. ${description}`;
-  const url = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+    if (!name.trim() || !email.trim() || !description.trim()) {
+      alert("Please fill out all fields.");
+      return;
+    }
 
-  window.open(url, '_blank')?.focus();
+    const text = `Hi dude, I'm ${name}. Contact me: ${email}. ${description}`;
+    const url = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
 
-  handleRestart(); // clear the form
+    window.open(url, "_blank")?.focus();
+
+    handleRestart(); // clear form
+  }, 600); // 👈 delay (600 ms)
 };
+
 
 
   function wtsp() {
@@ -55,9 +64,9 @@ const Contact = () => {
 }
    
   return (
-    <div id="contact">
-      <div className="min-h-screen bg-black bg-center flex items-center justify-center p-4 ">
-      <div className="w-full max-w-6xl bg-gray-600 rounded-xl shadow-xl border border-black overflow-hidden xl:w-[60%] 2xl:w-[70%]">
+    <div >
+      <div id="contact" className="min-h-screen bg-gray-950 bg-center flex items-center justify-center p-4 ">
+      <div className="lg:w-[65%] max-w-6xl bg-gray-700 rounded-xl shadow-xl border border-black overflow-hidden xl:w-[60%] 2xl:w-[70%]">
         
         {/* Header */}
         <div className="bg-gray-900 text-white text-sm px-4 py-3 flex justify-between items-center font-mono 2xl:h-20">
@@ -78,7 +87,14 @@ const Contact = () => {
             <p>
               To start, could you give us your <span className="text-purple-300">email</span> ? 
             </p>
-          
+            <div class="flex">
+          {/* <span class=" mt-4 "><svg xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-6 animate-blink">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+</svg>
+</span> */}
+{step === 1 && form.email.length === 0 && (
+    <span className="terminal_cursor mt-5"></span>
+)}
             {step > 1 ? (
               <p className="text-green-400 mt-1">✔ {form.email}</p>
             ) : (
@@ -90,13 +106,15 @@ const Contact = () => {
                 required
        
               
-                className="mt-2 w-full bg-transparent border-b border-gray-500 text-white outline-none py-1 text-base sm:text-lg 2xl:mt-2 2xl:text-2xl "
+                className=" email mt-2 w-full ml-1 bg-transparent border-b border-gray-500 text-white outline-none py-1 text-base sm:text-lg 2xl:mt-2 2xl:text-2xl "
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 onKeyDown={(e) => e.key === "Enter" && handleNext()}
                 id="email"
               /> 
+              
             )}
+            </div>
           </div>
 
           {/* Step 2: Name */}
@@ -174,6 +192,7 @@ const Contact = () => {
                 >
                   Send it!
                 </button>
+                <span id="msgspan " class="text-lime-500 block"></span>
               </div>
             </>
           )}
@@ -207,52 +226,118 @@ const Contact = () => {
          </div>
          </section> */}
           
-{/* contact links */}
-        <section id="contact" className="pt-10 pb-16 bg-black bg-cover bg-center">
-  <div className="container mx-auto px-4 backdrop-blur-md rounded-3xl shadow-2xl bg-black/30">
-    <h1 className="text-center text-white font-semibold text-2xl sm:text-3xl lg:text-4xl py-8">Contact Me</h1>
 
-    <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 px-4 pb-10">
-      {/* LinkedIn */}
-      <a href="https://www.linkedin.com/in/vishal-ravichandran232005" target="_blank" rel="noopener noreferrer">
-        <div className="flex flex-col items-center bg-gray-900 border border-white rounded-full w-32 mx-auto  p-6 hover:scale-105 transition-transform duration-300 shadow-xl shadow-gray-900 hover:shadow-2xl hover:shadow-violet-400 ">
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 sm:w-16 sm:h-16 mb-3" viewBox="0 0 128 128">
-            <path fill="#0076b2" d="M116 3H12a8.91 8.91 0 00-9 8.8v104.42a8.91 8.91 0 009 8.78h104a8.93 8.93 0 009-8.81V11.77A8.93 8.93 0 00116 3z"/>
-            <path fill="#fff" d="M21.06 48.73h18.11V107H21.06zm9.06-29a10.5 10.5 0 11-10.5 10.49 10.5 10.5 0 0110.5-10.49M50.53 48.73h17.36v8h.24c2.42-4.58 8.32-9.41 17.13-9.41C103.6 47.28 107 59.35 107 75v32H88.89V78.65c0-6.75-.12-15.44-9.41-15.44s-10.87 7.36-10.87 15V107H50.53z"/>
-          </svg>
-          {/* <h3 className="text-white text-lg font-medium">LinkedIn</h3> */}
-        </div>
-      </a>
 
-      {/* GitHub */}
-      <a href="https://github.com/Vishal-dev7" target="_blank" rel="noopener noreferrer">
-        <div className="flex flex-col items-center bg-gray-900 border border-white rounded-full p-6 hover:scale-105 transition-transform duration-300 w-32 mx-auto shadow-xl shadow-gray-900 hover:shadow-2xl hover:shadow-violet-400 ">
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 sm:w-16 sm:h-16 mb-3" viewBox="0 0 128 128">
-            <path fill="#fff" fillRule="evenodd" clipRule="evenodd" d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z"/>
-          </svg>
-          {/* <h3 className="text-white text-lg font-medium">GitHub</h3> */}
-        </div>
-      </a>
 
-      {/* Email */}
-      <a href="mailto:vishalravichandran37@gmail.com">
-        <div className="flex flex-col items-center bg-gray-900 border border-white rounded-full p-6 hover:scale-105 transition-transform duration-300 w-32 mx-auto  shadow-xl shadow-gray-900 hover:shadow-2xl hover:shadow-violet-400 ">
-          <svg viewBox="0 0 100 100" className="w-12 h-12 sm:w-16 sm:h-16 mb-3" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#d85040" d="M95.861 24.752c0-7.801-8.824-12.254-15.003-7.579l-5.844 4.427-25.014 18.935-25.014-18.948-5.831-4.415c-6.192-4.675-15.016-.221-15.016 7.579v53.654c0 3.49 2.799 6.316 6.257 6.316h14.59v-35.773l25.014 18.935 25.014-18.935v35.773h14.59c3.457 0 6.257-2.826 6.257-6.316V24.752z"/>
+     
+      
+      
+     
+  
+
+  
+
+  
+
+ <section
+      
+      className="relative min-h-screen w-full overflow-x-hidden bg-gray-950 flex flex-col "
+    >
+      {/* MAIN CONTENT */}
+      <div id="social" className="flex-grow flex items-center justify-center px-4 mb-4">
+        <div className="w-[80%] md:w-[70%] lg:w-[50%] max-w-6xl bg-gray-800/90 backdrop-blur-md rounded-3xl shadow-2xl">
+          <h1 className="text-center text-white font-semibold text-2xl sm:text-3xl lg:text-4xl py-8">
+            Contact Me
+          </h1>
+
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-4 px-6 pb-10 place-items-center">
+
+
+            {/* LINKEDIN */}
+            <a
+              href="https://www.linkedin.com/in/vishal-ravichandran232005"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex justify-center"
+            >
+              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-900 border border-white shadow-lg transition hover:scale-110 float-glow ">
+                
+                  <svg width="30px" height="30px" class="" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M18 22V15C18 13.8954 17.1046 13 16 13C14.8954 13 14 13.8954 14 15V22H10" stroke="#3276c3" stroke-width="1.752" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10 22V15C10 11.6863 12.6863 9 16 9C19.3137 9 22 11.6863 22 15V22H18" stroke="#3276c3" stroke-width="1.752" stroke-linecap="round" stroke-linejoin="round"></path> <rect x="3" y="9" width="4" height="13" stroke="#3276c3" stroke-width="1.752" stroke-linecap="round" stroke-linejoin="round"></rect> <circle cx="5" cy="4" r="2" stroke="#3276c3" stroke-width="1.752" stroke-linecap="round" stroke-linejoin="round"></circle> </g></svg>
+          
+                  
+              </div>
+            </a>
+
+            {/* GITHUB */}
+            <a
+              href="https://github.com/Vishal-dev7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex justify-center"
+            >
+              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-900 border border-white shadow-lg transition hover:scale-110 float-glow ripple">
+                <svg viewBox="0 0 24 24" width="30px" height="30px" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" stroke-width="0.00024000000000000003"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4.0744 2.9938C4.13263 1.96371 4.37869 1.51577 5.08432 1.15606C5.84357 0.768899 7.04106 0.949072 8.45014 1.66261C9.05706 1.97009 9.11886 1.97635 10.1825 1.83998C11.5963 1.65865 13.4164 1.65929 14.7213 1.84164C15.7081 1.97954 15.7729 1.97265 16.3813 1.66453C18.3814 0.651679 19.9605 0.71795 20.5323 1.8387C20.8177 2.39812 20.8707 3.84971 20.6494 5.04695C20.5267 5.71069 20.5397 5.79356 20.8353 6.22912C22.915 9.29385 21.4165 14.2616 17.8528 16.1155C17.5801 16.2574 17.3503 16.3452 17.163 16.4167C16.5879 16.6363 16.4133 16.703 16.6247 17.7138C16.7265 18.2 16.8491 19.4088 16.8973 20.4002C16.9844 22.1922 16.9831 22.2047 16.6688 22.5703C16.241 23.0676 15.6244 23.076 15.2066 22.5902C14.9341 22.2734 14.9075 22.1238 14.9075 20.9015C14.9075 19.0952 14.7095 17.8946 14.2417 16.8658C13.6854 15.6415 14.0978 15.185 15.37 14.9114C17.1383 14.531 18.5194 13.4397 19.2892 11.8146C20.0211 10.2698 20.1314 8.13501 18.8082 6.83668C18.4319 6.3895 18.4057 5.98446 18.6744 4.76309C18.7748 4.3066 18.859 3.71768 18.8615 3.45425C18.8653 3.03823 18.8274 2.97541 18.5719 2.97541C18.4102 2.97541 17.7924 3.21062 17.1992 3.49805L16.2524 3.95695C16.1663 3.99866 16.07 4.0147 15.975 4.0038C13.5675 3.72746 11.2799 3.72319 8.86062 4.00488C8.76526 4.01598 8.66853 3.99994 8.58215 3.95802L7.63585 3.49882C7.04259 3.21087 6.42482 2.97541 6.26317 2.97541C5.88941 2.97541 5.88379 3.25135 6.22447 4.89078C6.43258 5.89203 6.57262 6.11513 5.97101 6.91572C5.06925 8.11576 4.844 9.60592 5.32757 11.1716C5.93704 13.1446 7.4295 14.4775 9.52773 14.9222C10.7926 15.1903 11.1232 15.5401 10.6402 16.9905C10.26 18.1319 10.0196 18.4261 9.46707 18.4261C8.72365 18.4261 8.25796 17.7821 8.51424 17.1082C8.62712 16.8112 8.59354 16.7795 7.89711 16.5255C5.77117 15.7504 4.14514 14.0131 3.40172 11.7223C2.82711 9.95184 3.07994 7.64739 4.00175 6.25453C4.31561 5.78028 4.32047 5.74006 4.174 4.83217C4.09113 4.31822 4.04631 3.49103 4.0744 2.9938Z" fill="#ffffff"></path> <path d="M3.33203 15.9454C3.02568 15.4859 2.40481 15.3617 1.94528 15.6681C1.48576 15.9744 1.36158 16.5953 1.66793 17.0548C1.8941 17.3941 2.16467 17.6728 2.39444 17.9025C2.4368 17.9449 2.47796 17.9858 2.51815 18.0257C2.71062 18.2169 2.88056 18.3857 3.05124 18.5861C3.42875 19.0292 3.80536 19.626 4.0194 20.6962C4.11474 21.1729 4.45739 21.4297 4.64725 21.5419C4.85315 21.6635 5.07812 21.7352 5.26325 21.7819C5.64196 21.8774 6.10169 21.927 6.53799 21.9559C7.01695 21.9877 7.53592 21.998 7.99999 22.0008C8.00033 22.5527 8.44791 23.0001 8.99998 23.0001C9.55227 23.0001 9.99998 22.5524 9.99998 22.0001V21.0001C9.99998 20.4478 9.55227 20.0001 8.99998 20.0001C8.90571 20.0001 8.80372 20.0004 8.69569 20.0008C8.10883 20.0026 7.34388 20.0049 6.67018 19.9603C6.34531 19.9388 6.07825 19.9083 5.88241 19.871C5.58083 18.6871 5.09362 17.8994 4.57373 17.2891C4.34391 17.0194 4.10593 16.7834 3.91236 16.5914C3.87612 16.5555 3.84144 16.5211 3.80865 16.4883C3.5853 16.265 3.4392 16.1062 3.33203 15.9454Z" fill="#ffffff"></path> </g>
+         </svg>
+              </div>
+            </a>
+
+            {/* EMAIL */}
+            <a
+              href="mailto:vishalravichandran37@gmail.com"
+              className="flex justify-center"
+            >
+              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-900 border border-white shadow-lg transition hover:scale-110 float-glow ripple">
+                <svg viewBox="0 0 32 32" class="w-8 h-8" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M16.58,19.1068l-12.69-8.0757A3,3,0,0,1,7.1109,5.97l9.31,5.9243L24.78,6.0428A3,3,0,0,1,28.22,10.9579Z" fill="#ea4435"></path><path d="M25.5,5.5h4a0,0,0,0,1,0,0v18a3,3,0,0,1-3,3h0a3,3,0,0,1-3-3V7.5a2,2,0,0,1,2-2Z" fill="#00ac47" transform="translate(53.0001 32.0007) rotate(180)"></path><path d="M29.4562,8.0656c-.0088-.06-.0081-.1213-.0206-.1812-.0192-.0918-.0549-.1766-.0823-.2652a2.9312,2.9312,0,0,0-.0958-.2993c-.02-.0475-.0508-.0892-.0735-.1354A2.9838,2.9838,0,0,0,28.9686,6.8c-.04-.0581-.09-.1076-.1342-.1626a3.0282,3.0282,0,0,0-.2455-.2849c-.0665-.0647-.1423-.1188-.2146-.1771a3.02,3.02,0,0,0-.24-.1857c-.0793-.0518-.1661-.0917-.25-.1359-.0884-.0461-.175-.0963-.267-.1331-.0889-.0358-.1837-.0586-.2766-.0859s-.1853-.06-.2807-.0777a3.0543,3.0543,0,0,0-.357-.036c-.0759-.0053-.1511-.0186-.2273-.018a2.9778,2.9778,0,0,0-.4219.0425c-.0563.0084-.113.0077-.1689.0193a33.211,33.211,0,0,0-.5645.178c-.0515.022-.0966.0547-.1465.0795A2.901,2.901,0,0,0,23.5,8.5v5.762l4.72-3.3043a2.8878,2.8878,0,0,0,1.2359-2.8923Z" fill="#ffba00"></path><path d="M5.5,5.5h0a3,3,0,0,1,3,3v18a0,0,0,0,1,0,0h-4a2,2,0,0,1-2-2V8.5a3,3,0,0,1,3-3Z" fill="#4285f4"></path><path d="M2.5439,8.0656c.0088-.06.0081-.1213.0206-.1812.0192-.0918.0549-.1766.0823-.2652A2.9312,2.9312,0,0,1,2.7426,7.32c.02-.0475.0508-.0892.0736-.1354A2.9719,2.9719,0,0,1,3.0316,6.8c.04-.0581.09-.1076.1342-.1626a3.0272,3.0272,0,0,1,.2454-.2849c.0665-.0647.1423-.1188.2147-.1771a3.0005,3.0005,0,0,1,.24-.1857c.0793-.0518.1661-.0917.25-.1359A2.9747,2.9747,0,0,1,4.3829,5.72c.089-.0358.1838-.0586.2766-.0859s.1853-.06.2807-.0777a3.0565,3.0565,0,0,1,.357-.036c.076-.0053.1511-.0186.2273-.018a2.9763,2.9763,0,0,1,.4219.0425c.0563.0084.113.0077.169.0193a2.9056,2.9056,0,0,1,.286.0888,2.9157,2.9157,0,0,1,.2785.0892c.0514.022.0965.0547.1465.0795a2.9745,2.9745,0,0,1,.3742.21A2.9943,2.9943,0,0,1,8.5,8.5v5.762L3.78,10.9579A2.8891,2.8891,0,0,1,2.5439,8.0656Z" fill="#c52528"></path></g>
           </svg>
-          {/* <h3 className="text-white text-lg font-medium">Email</h3> */}
+              </div>
+            </a>
+
+            {/* INSTAGRAM */}
+            <a
+              href="https://www.instagram.com/im_vishal.7/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex justify-center"
+            >
+              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-900 border border-white shadow-lg transition hover:scale-110 float-glow ripple">
+                 <svg viewBox="0 0 24 24" class="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="#C13584"></path> <path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z" fill="#C13584"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z" fill="#C13584"></path> </g>
+        
+        </svg>
+              </div>
+            </a>
+          </div>
         </div>
-      </a>
-      {/* instagram */}
-      <a href="https://www.instagram.com/im_vishal.7/" target="_blank" rel="noopener noreferrer">
-        <div className="flex flex-col items-center bg-gray-900 border border-white rounded-full p-6 hover:scale-105 transition-transform duration-300 w-32 mx-auto shadow-xl shadow-gray-900 hover:shadow-2xl hover:shadow-violet-400 ">
-         <svg viewBox="0 0 2500 2500" className="w-12 h-12 sm:w-16 sm:h-16 mb-3" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><defs><radialGradient id="0" cx="332.14" cy="2511.81" r="3263.54" gradientUnits="userSpaceOnUse"><stop offset=".09" stop-color="#fa8f21"></stop><stop offset=".78" stop-color="#d82d7e"></stop></radialGradient><radialGradient id="1" cx="1516.14" cy="2623.81" r="2572.12" gradientUnits="userSpaceOnUse"><stop offset=".64" stop-color="#8c3aaa" stop-opacity="0"></stop><stop offset="1" stop-color="#8c3aaa"></stop></radialGradient></defs><path d="M833.4,1250c0-230.11,186.49-416.7,416.6-416.7s416.7,186.59,416.7,416.7-186.59,416.7-416.7,416.7S833.4,1480.11,833.4,1250m-225.26,0c0,354.5,287.36,641.86,641.86,641.86S1891.86,1604.5,1891.86,1250,1604.5,608.14,1250,608.14,608.14,895.5,608.14,1250M1767.27,582.69a150,150,0,1,0,150.06-149.94h-0.06a150.07,150.07,0,0,0-150,149.94M745,2267.47c-121.87-5.55-188.11-25.85-232.13-43-58.36-22.72-100-49.78-143.78-93.5s-70.88-85.32-93.5-143.68c-17.16-44-37.46-110.26-43-232.13-6.06-131.76-7.27-171.34-7.27-505.15s1.31-373.28,7.27-505.15c5.55-121.87,26-188,43-232.13,22.72-58.36,49.78-100,93.5-143.78s85.32-70.88,143.78-93.5c44-17.16,110.26-37.46,232.13-43,131.76-6.06,171.34-7.27,505-7.27s373.28,1.31,505.15,7.27c121.87,5.55,188,26,232.13,43,58.36,22.62,100,49.78,143.78,93.5s70.78,85.42,93.5,143.78c17.16,44,37.46,110.26,43,232.13,6.06,131.87,7.27,171.34,7.27,505.15s-1.21,373.28-7.27,505.15c-5.55,121.87-25.95,188.11-43,232.13-22.72,58.36-49.78,100-93.5,143.68s-85.42,70.78-143.78,93.5c-44,17.16-110.26,37.46-232.13,43-131.76,6.06-171.34,7.27-505.15,7.27s-373.28-1.21-505-7.27M734.65,7.57c-133.07,6.06-224,27.16-303.41,58.06C349,97.54,279.38,140.35,209.81,209.81S97.54,349,65.63,431.24c-30.9,79.46-52,170.34-58.06,303.41C1.41,867.93,0,910.54,0,1250s1.41,382.07,7.57,515.35c6.06,133.08,27.16,223.95,58.06,303.41,31.91,82.19,74.62,152,144.18,221.43S349,2402.37,431.24,2434.37c79.56,30.9,170.34,52,303.41,58.06C868,2498.49,910.54,2500,1250,2500s382.07-1.41,515.35-7.57c133.08-6.06,223.95-27.16,303.41-58.06,82.19-32,151.86-74.72,221.43-144.18s112.18-139.24,144.18-221.43c30.9-79.46,52.1-170.34,58.06-303.41,6.06-133.38,7.47-175.89,7.47-515.35s-1.41-382.07-7.47-515.35c-6.06-133.08-27.16-224-58.06-303.41-32-82.19-74.72-151.86-144.18-221.43S2150.95,97.54,2068.86,65.63c-79.56-30.9-170.44-52.1-303.41-58.06C1632.17,1.51,1589.56,0,1250.1,0S868,1.41,734.65,7.57" fill="url(#0)"></path><path d="M833.4,1250c0-230.11,186.49-416.7,416.6-416.7s416.7,186.59,416.7,416.7-186.59,416.7-416.7,416.7S833.4,1480.11,833.4,1250m-225.26,0c0,354.5,287.36,641.86,641.86,641.86S1891.86,1604.5,1891.86,1250,1604.5,608.14,1250,608.14,608.14,895.5,608.14,1250M1767.27,582.69a150,150,0,1,0,150.06-149.94h-0.06a150.07,150.07,0,0,0-150,149.94M745,2267.47c-121.87-5.55-188.11-25.85-232.13-43-58.36-22.72-100-49.78-143.78-93.5s-70.88-85.32-93.5-143.68c-17.16-44-37.46-110.26-43-232.13-6.06-131.76-7.27-171.34-7.27-505.15s1.31-373.28,7.27-505.15c5.55-121.87,26-188,43-232.13,22.72-58.36,49.78-100,93.5-143.78s85.32-70.88,143.78-93.5c44-17.16,110.26-37.46,232.13-43,131.76-6.06,171.34-7.27,505-7.27s373.28,1.31,505.15,7.27c121.87,5.55,188,26,232.13,43,58.36,22.62,100,49.78,143.78,93.5s70.78,85.42,93.5,143.78c17.16,44,37.46,110.26,43,232.13,6.06,131.87,7.27,171.34,7.27,505.15s-1.21,373.28-7.27,505.15c-5.55,121.87-25.95,188.11-43,232.13-22.72,58.36-49.78,100-93.5,143.68s-85.42,70.78-143.78,93.5c-44,17.16-110.26,37.46-232.13,43-131.76,6.06-171.34,7.27-505.15,7.27s-373.28-1.21-505-7.27M734.65,7.57c-133.07,6.06-224,27.16-303.41,58.06C349,97.54,279.38,140.35,209.81,209.81S97.54,349,65.63,431.24c-30.9,79.46-52,170.34-58.06,303.41C1.41,867.93,0,910.54,0,1250s1.41,382.07,7.57,515.35c6.06,133.08,27.16,223.95,58.06,303.41,31.91,82.19,74.62,152,144.18,221.43S349,2402.37,431.24,2434.37c79.56,30.9,170.34,52,303.41,58.06C868,2498.49,910.54,2500,1250,2500s382.07-1.41,515.35-7.57c133.08-6.06,223.95-27.16,303.41-58.06,82.19-32,151.86-74.72,221.43-144.18s112.18-139.24,144.18-221.43c30.9-79.46,52.1-170.34,58.06-303.41,6.06-133.38,7.47-175.89,7.47-515.35s-1.41-382.07-7.47-515.35c-6.06-133.08-27.16-224-58.06-303.41-32-82.19-74.72-151.86-144.18-221.43S2150.95,97.54,2068.86,65.63c-79.56-30.9-170.44-52.1-303.41-58.06C1632.17,1.51,1589.56,0,1250.1,0S868,1.41,734.65,7.57" fill="url(#1)"></path></g></svg>
-          {/* <h3 className="text-white text-lg font-medium">Instagram</h3> */}
+      </div>
+
+      {/* FOOTER */}
+      <footer className="w-full bg-gray-900/80 py-6 mt-auto">
+        <div className="text-center text-white/80 text-sm space-y-2">
+          <p>© {new Date().getFullYear()} Vishal R. All rights reserved.</p>
+
+          <div className="flex justify-center items-center gap-2">
+            <span>Built with</span>
+            <img
+              src={Reacticon}
+              alt="React"
+              className="w-5 h-5 animate-spin"
+            />
+            <span>using</span>
+            <span class="animate-pulse"><svg xmlns="http://www.w3.org/2000/svg"
+             width="28" height="25" viewBox="0 0 128 128"><title>Vitejs SVG Icon</title>
+             <path fill="#ffd700" d="M91.557 1.92L49.05 10.248a1.06 1.06 0 0 0-.856.977l-2.617 44.168a1.05 1.05 0 0 0 1.299 1.097l11.836-2.736c1.444-.332 2.78.972 2.482 2.424l-3.517 17.218a1.047 1.047 0 0 0 1.35 1.227l7.308-2.223c1.475-.447 2.929.881 2.62 2.391l-5.59 27.047c-.128.62.192 1.014.638 1.197s.95.127 1.293-.404l.61-.945l34.626-69.106c.41-.818-.254-1.692-1.146-1.52L87.2 33.413c-1.49.29-2.792-1.136-2.369-2.594l7.951-27.562A1.046 1.046 0 0 0 91.56 1.92h-.002zM6.086 14.86a3 3 0 0 0-.463.02c-2.106.254-3.467 2.637-2.318 4.651l58.582 102.73c1.203 2.11 4.25 2.098 5.437-.023L124.766 19.52c1.289-2.305-.688-5.067-3.286-4.594l-32.744 5.969l-2.943 10.2v.003a1.043 1.043 0 0 0 1.217 1.334h.002l12.183-2.354v.002c1.646-.319 2.986 1.446 2.233 2.947l-34.653 69.155l-.638.992a2.055 2.055 0 0 1-2.512.787a2.06 2.06 0 0 1-1.238-2.324l5.59-27.047a1.05 1.05 0 0 0-1.35-1.233l-7.309 2.223c-1.472.448-2.927-.875-2.62-2.383l3.517-17.218a1.05 1.05 0 0 0-1.278-1.25l-11.835 2.736c-1.328.304-2.6-.771-2.522-2.131l1.973-33.277L6.566 14.91a3 3 0 0 0-.48-.05"/></svg></span>
+  
+          </div>
         </div>
-      </a>
-    </div>
-  </div>
-</section>
+      </footer>
+    </section>
+
+
+
+  
+  
+
+
+
 
         </div>
         
