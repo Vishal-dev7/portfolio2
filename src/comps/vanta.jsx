@@ -30,8 +30,8 @@ const VantaBackground = () => {
       ref={vantaRef}
       style={{
         position: "fixed",
-        top: 0,
-        left: 0,
+        top: 50,
+        left: 50,
         zIndex: -1,
         width: "100vw",
         height: "100vh",
