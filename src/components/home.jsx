@@ -46,7 +46,7 @@ const Home = () => {
       <section className=" pt-5 md:pt-18  z-10 grid grid-cols-1 sm:grid-cols-2 px-10 sm:px-16 md:px-20 lg:px-24 pb-24 w-full">
          
         {/* LEFT */}
-        <div className="mt-10 sm:mt-20 ">
+        <div className="order-2 sm:order-1 mt-10 sm:mt-20 neon-particles">
                   <h1 className="font-bold text-4xl md:text-5xl xl:text-6xl mb-6">
                     Vishal.R
                   </h1>
@@ -71,11 +71,11 @@ const Home = () => {
                 </div>
 
         {/* RIGHT */}
-        <div className="order-2 sm:order-1 flex justify-center items-center mt-14 sm:mt-20 ">
+        <div className="order-1 sm:order-2 flex justify-center items-center mt-14 sm:mt-20 ">
                   <img
                     src={vishal}
                     alt="profile"
-                    className="rounded-full w-[55%] sm:w-[60%] md:w-[50%] lg:w-[40%] shadow-2xl shadow-black"
+                    className="rounded-full w-[55%] sm:w-[60%] md:w-[50%] lg:w-[40%] shadow-2xl shadow-black "
                   />
                 </div>
 

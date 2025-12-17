@@ -65,12 +65,12 @@ const Contact = () => {
    
   return (
     <div >
-      <div id="contact" className="min-h-screen bg-gray-950 bg-center flex items-center justify-center p-4 ">
-      <div className="lg:w-[65%] max-w-6xl bg-gray-700 rounded-xl shadow-xl border border-black overflow-hidden xl:w-[60%] 2xl:w-[70%]">
+      <div id="contact" className=" min-h-screen bg-gray-950 bg-center flex items-center justify-center p-4 ">
+      <div className="r lg:w-[65%] max-w-6xl bg-gray-700 rounded-xl shadow-xl border border-black overflow-hidden xl:w-[60%] 2xl:w-[70%]">
         
         {/* Header */}
         <div className="bg-gray-900 text-white text-sm px-4 py-3 flex justify-between items-center font-mono 2xl:h-20">
-          <span className="text-2xl 2xl:text-3xl">Get in touch today</span>
+          <span className="text-2xl 2xl:text-3xl ">Get in touch today</span>
           <div className="flex space-x-1">
             <div className="w-3 h-3 2xl:w-7 2xl:h-7 bg-red-500 rounded-full" />
             <div className="w-3 h-3 2xl:w-7 2xl:h-7 bg-yellow-400 rounded-full" />
@@ -80,7 +80,7 @@ const Contact = () => {
 
         {/* Body */}
         <div className="text-white font-mono px-6 py-8 space-y-6 text-base sm:text-lg leading-relaxed 2xl:text-2xl">
-          <p className="text-sm sm:text-base 2xl:text-2xl">Hey there! We're excited to link 📎</p>
+          <p className="text-sm sm:text-base 2xl:text-2xl ">Hey there! We're excited to link 📎</p>
           <hr className="border-t border-dashed border-gray-500" />
 
          <div>

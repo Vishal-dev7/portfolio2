@@ -2,7 +2,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
 import Calculator from "../img/calculator.jpg";
 import Evolve from "../img/evolve.jpg";
-import Port from "../img/port.jpg";
+import Port from "../img/port2.jpg";
 import Todo from "../img/todo.jpg";
 import ResumeBuilder from "../img/resume.jpg";
 
@@ -74,7 +74,7 @@ export default function Stack({
             img: Port,
           },
           {
-            id: 1,
+            id: 5,
             title: "Calculator",
             description: "An application for performing arithmetic operations.",
             link: "https://calculator-ochre-one.vercel.app/",
@@ -148,7 +148,7 @@ export default function Stack({
               sensitivity={sensitivity}
             >
               <motion.div
-                className="rounded-2xl overflow-hidden border-2 border-white backdrop-blur-2xl flex flex-col"
+                className="rounded-2xl overflow-hidden border-2 border-white bg-gray-950 flex flex-col"
                 onClick={() => sendToBackOnClick && sendToBack(card.id)}
                 animate={{
                   rotateZ: (cards.length - index - 1) * 4 + randomRotate,
