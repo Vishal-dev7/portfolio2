@@ -18,30 +18,28 @@ const Contact = () => {
      setForm({ email: "", name: "", description: "" });
      setStep(1);
    };
- 
+ const [statusMsg, setStatusMsg] = useState("");
+
   const handleSend = () => {
-  const msgspan = document.getElementById("msgspan");
-  msgspan.textContent = "msg sending...";
+  const { name, email, description } = form;
 
-  // Delay redirect so text updates first
+  if (!name || !email || !description) {
+    setStatusMsg(" Please fill all fields");
+    return;
+  }
+
+  setStatusMsg("Redirecting to WhatsApp...");
+
+  const message = `Hi, I'm ${name}. Contact: ${email}. ${description}`;
+  const phone = "919342236148";
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+  // Small delay to show message
   setTimeout(() => {
-    alert("Redirecting to WhatsApp");
-
-    const number = "+919342236148";
-    const { name, email, description } = form;
-
-    if (!name.trim() || !email.trim() || !description.trim()) {
-      alert("Please fill out all fields.");
-      return;
-    }
-
-    const text = `Hi dude, I'm ${name}. Contact me: ${email}. ${description}`;
-    const url = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
-
-    window.open(url, "_blank")?.focus();
-
-    handleRestart(); // clear form
-  }, 600); // 👈 delay (600 ms)
+    window.open(url, "_blank");
+    setStatusMsg(" Message sent successfully!");
+    handleRestart();
+  }, 600);
 };
 
 
@@ -192,7 +190,12 @@ const Contact = () => {
                 >
                   Send it!
                 </button>
-                <span id="msgspan " class="text-lime-500 block"></span>
+                {statusMsg && (
+  <span className="text-lime-400 font-medium block mt-2">
+    {statusMsg}
+  </span>
+)}
+
               </div>
             </>
           )}
