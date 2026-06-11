@@ -2,6 +2,9 @@
 module.exports = {
   theme: {
     extend: {
+      fontFamily: {
+      poppins: ['Poppins', 'sans-serif'],
+    },
       keyframes: {
         blink: {
           '0%, 50%, 100%': { opacity: '1' },

@@ -66,9 +66,10 @@
 
 .terminal_cursor {
   display: block;
-  height: 14px;
+  height: 18px;
   width: 5px;
   margin-left: 10px;
+  margin-bottom: 1px;
   animation: curbl 1200ms linear infinite;
 }
 

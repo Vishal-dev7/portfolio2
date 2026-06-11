@@ -8,10 +8,17 @@ const Contact = () => {
    const inputRef = useRef(null);
  
    const handleNext = () => {
-     if (step === 1 && form.email.trim()) setStep(2);
+     if (step === 1 && form.email.trim())  setStep(2);
      if (step === 2 && form.name.trim()) setStep(3);
      if (step === 3 && form.description.trim()) setStep(4);
 
+   };
+   const emailvalid = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(email)) {
+  setStatusMsg("Enter a valid email address");
+  return;
+}
    };
  
    const handleRestart = () => {
@@ -24,20 +31,24 @@ const Contact = () => {
   const { name, email, description } = form;
 
   if (!name || !email || !description) {
-    setStatusMsg(" Please fill all fields");
+    setStatusMsg("Please fill all fields");
     return;
   }
 
   setStatusMsg("Redirecting to WhatsApp...");
 
-  const message = `Hi, I'm ${name}. Contact: ${email}. ${description}`;
+  const message = `Hello, I'm ${name}
+Contact me on: ${email}
+Here is my message for you: ${description}
+Thank you!`;
+
   const phone = "919342236148";
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
   // Small delay to show message
   setTimeout(() => {
     window.open(url, "_blank");
-    setStatusMsg(" Message sent successfully!");
+    setStatusMsg("Message sent successfully! Thanks for your message");
     handleRestart();
   }, 600);
 };
@@ -53,7 +64,7 @@ const Contact = () => {
   let msg = document.getElementById('msg').value.trim();
 
   // Encode message properly
-  let text = `Hi dude, I'm ${name}   Contact me: ${email}  ${msg}`;
+  let text = `Hey , I'm ${name}   \n Here my mail: ${email} \n sub: ${msg}\n thanks you..!`;
   alert("wait");
   let url = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
   
@@ -64,21 +75,21 @@ const Contact = () => {
   return (
     <div >
       <div id="contact" className=" min-h-screen bg-gray-950 bg-center flex items-center justify-center p-4 ">
-      <div className="r lg:w-[65%] max-w-6xl bg-gray-700 rounded-xl shadow-xl border border-black overflow-hidden xl:w-[60%] 2xl:w-[70%]">
+      <div className="r lg:w-[55%] max-w-5xl bg-gray-700 rounded-xl shadow-xl border border-black overflow-hidden xl:w-[60%] 2xl:w-[70%]">
         
         {/* Header */}
         <div className="bg-gray-900 text-white text-sm px-4 py-3 flex justify-between items-center font-mono 2xl:h-20">
           <span className="text-2xl 2xl:text-3xl ">Get in touch today</span>
           <div className="flex space-x-1">
-            <div className="w-3 h-3 2xl:w-7 2xl:h-7 bg-red-500 rounded-full" />
-            <div className="w-3 h-3 2xl:w-7 2xl:h-7 bg-yellow-400 rounded-full" />
-            <div className="w-3 h-3 2xl:w-7 2xl:h-7 bg-green-500 rounded-full" />
+            <div className="w-3 h-3 2xl:w-5 2xl:h-5 bg-red-500 rounded-full" />
+            <div className="w-3 h-3 2xl:w-5 2xl:h-5 bg-yellow-400 rounded-full" />
+            <div className="w-3 h-3 2xl:w-5 2xl:h-5 bg-green-500 rounded-full" />
           </div>
         </div>
 
         {/* Body */}
-        <div className="text-white font-mono px-6 py-8 space-y-6 text-base sm:text-lg leading-relaxed 2xl:text-2xl">
-          <p className="text-sm sm:text-base 2xl:text-2xl ">Hey there! We're excited to link 📎</p>
+        <div className="text-white font-mono px-6 py-8 space-y-6 text-base sm:text-lg leading-relaxed 2xl:text-xl">
+          <p className="text-sm sm:text-base 2xl:text-xl ">Hey there! We're excited to link 📎</p>
           <hr className="border-t border-dashed border-gray-500" />
 
          <div>
@@ -104,11 +115,12 @@ const Contact = () => {
                 required
        
               
-                className=" email mt-2 w-full ml-1 bg-transparent border-b border-gray-500 text-white outline-none py-1 text-base sm:text-lg 2xl:mt-2 2xl:text-2xl "
-                value={form.email}
+                className=" email mt-2 w-full ml-1 bg-transparent border-b border-gray-500 text-white outline-none py-1 text-base sm:text-lg 2xl:mt-2 2xl:text-xl "
+                value={ form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                onKeyDown={(e) => e.key === "Enter" && handleNext()}
+                onKeyDown={(e) => e.key === "Enter" && handleNext() }
                 id="email"
+                
               /> 
               
             )}
@@ -133,11 +145,12 @@ const Contact = () => {
                   required 
                   autofocus
                   maxLength={20 }
-                  className="mt-2 w-full bg-transparent border-b border-gray-500 text-white outline-none py-1 text-base sm:text-lg 2xl:text-2xl"
+                  className="mt-2 w-full bg-transparent border-b border-gray-500 text-white outline-none py-1 text-base sm:text-lg 2xl:text-xl"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   onKeyDown={(e) => e.key === "Enter" && handleNext()}
                   id="name"
+                  autoFocus
                 />
               )}</div>
 
@@ -154,14 +167,15 @@ const Contact = () => {
               ) : (
                 <textarea
                   ref={inputRef}
-                  placeholder="Describe your request..."
+                  placeholder="Describe your message for us..."
                   rows={3} 
                   autofocus
-                  className="mt-2 w-full bg-transparent border-b border-gray-500 text-wrap text-white outline-none resize-none py-1 text-base sm:text-lg 2xl:text-2xl"
+                  className="mt-2 w-full bg-transparent border-b border-gray-500 text-wrap text-white outline-none resize-none py-1 text-base sm:text-lg 2xl:text-xl"
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
                   onKeyDown={(e) => e.key === "Enter" && handleNext()}
                   id="msg"
+                  autoFocus
                 />
               )}
             </div>
@@ -171,14 +185,16 @@ const Contact = () => {
           {step === 4 && (
             <>
               <p>Beautiful! Here's what we've got:</p>
-              <div className="space-y-1 text-sm sm:text-base 2xl:text-2xl">
-                <p><span className="text-blue-400 2xl:text-2xl">email:</span> {form.email}</p>
-                <p><span className="text-blue-400 2xl:text-2xl">name:</span> {form.name}</p>
-                <p><span className="text-purple-400 text-wrap 2xl:text-2xl">description:</span> {form.description}</p>
+              <div className="space-y-1 text-sm sm:text-base 2xl:text-xl">
+                <p><span className="text-blue-400 2xl:text-lg">email:</span> {form.email}</p>
+                <p><span className="text-blue-400 2xl:text-lg">name:</span> {form.name}</p>
+                <p><span className="text-purple-400 text-wrap 2xl:text-lg">description:</span> {form.description}</p>
               </div>
               <p className="mt-4">Look good?</p>
               <div className="mt-4 flex flex-wrap gap-3">
+                
                 <button
+               
                   onClick={handleRestart}
                   className="bg-white text-black border border-black px-4 py-2 rounded-4xl hover:bg-gray-300 2xl:px-6"
                 >

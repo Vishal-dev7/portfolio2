@@ -8,3 +8,7 @@ export default defineConfig({
     react()],
      base:process.loadEnvFile.VITE_BASE_PATH ,
 })
+// vite.config.js
+// export default {
+//   assetsInclude: ['**/*.glb']
+// }
