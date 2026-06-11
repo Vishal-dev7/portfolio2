@@ -74,7 +74,7 @@ Thank you!`;
    
   return (
     <div >
-      <div id="contact" className=" min-h-screen bg-gray-950 bg-center flex items-center justify-center p-4 ">
+      <div id="contact" className=" min-h-screen bg-gray-950 bg-center flex items-center justify-center  p-4 ">
       <div className="r lg:w-[55%] max-w-5xl bg-gray-700 rounded-xl shadow-xl border border-black overflow-hidden xl:w-[60%] 2xl:w-[70%]">
         
         {/* Header */}

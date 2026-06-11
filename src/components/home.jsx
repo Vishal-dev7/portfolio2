@@ -14,6 +14,25 @@ const Home = () => {
     return !sessionStorage.getItem('lanyardSeen');
   });
 
+  // Only show lanyard on desktop devices
+  const [isDesktop, setIsDesktop] = useState(() => (
+    typeof window !== 'undefined' && window.innerWidth >= 768
+  ));
+  
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(min-width: 768px)');
+    const handler = (e) => setIsDesktop(e.matches);
+    setIsDesktop(mq.matches);
+    if (mq.addEventListener) mq.addEventListener('change', handler);
+    else mq.addListener(handler);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', handler);
+      else mq.removeListener(handler);
+    };
+  }, []);
+
   const [fadeOut, setFadeOut] = useState(false);
 
   // ✅ When card is thrown — fade out, then unmount
@@ -90,7 +109,7 @@ const Home = () => {
       </section>
 
       {/* ✅ LANYARD OVERLAY — mounts only on first visit, unmounts after throw */}
-      {showLanyard && (
+      {showLanyard && isDesktop && (
         <div
           className="absolute inset-0 z-20"
           style={{
